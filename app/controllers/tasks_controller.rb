@@ -1,8 +1,7 @@
 class TasksController < ApplicationController
 
   def index
-    @incomplete_tasks = Task.incomplete
-    @complete_tasks = Task.complete
+    @tasks = Task.all
   end
 
   def show
@@ -14,13 +13,24 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    @task.save
-    redirect_to tasks_path
+    # @task = Task.new(task_params)
+    @task = Task.create(task_params)
+    if @task.save
+      redirect_to tasks_path, :notice => "Your task was saved!"
+    else
+      render 'new'
+    end
   end
 
   def edit
     @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.completed = true
+    @task.save!
+    redirect_to tasks_path(@task), :notice => "Your task was updated!"
   end
 
   def destroy

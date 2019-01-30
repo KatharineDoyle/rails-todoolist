@@ -7,6 +7,8 @@
   <%= t.label :details %>
   <%= t.text_field :details, class: 'form-control' %>
 </div>
+  <%= t.label :completed, task.name %>
+  <%= t.check_box :completed %>
   <%= t.submit 'Update', class: 'btn btn-primary'  %>
 <% end %>
 </div>
