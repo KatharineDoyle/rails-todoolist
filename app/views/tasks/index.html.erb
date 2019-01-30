@@ -9,10 +9,11 @@
     <% @tasks.each do |task| %>
     <li>
      <% if task.completed == true %>
-     <%= "[x]" %>
+
+     <%= "Completed task" %>
      <p> <%= link_to task.name, task_path(task[:id]) %></p>
      <% else %>
-     <%= "[ ]" %>
+     <%= "Incomplete tasks" %>
      <p> <%= link_to task.name, task_path(task[:id]) %></p>
      <% end %>
      <p><%= link_to "Edit", task_path(task[:id]), method: :edit %></p>
@@ -21,4 +22,3 @@
    <% end %>
 
  </ul>
-
