@@ -1,24 +1,37 @@
 <h2>My To Do List</h2>
 
 <div class="new-task-box">
-<input type="text" id="myInput" placeholder="Title...">
-<%= link_to "+ Add a new task", new_task_path %>
+  <%= link_to 'Add a New Task +', tasks_new_path, class: 'btn btn-primary' %>
 </div>
 
-  <ul>
-    <% @tasks.each do |task| %>
-    <li>
-     <% if task.completed == true %>
+ <h1>Incomplete Tasks</h1>
+<%= form_tag(complete_tasks_path, method: :put)  do %>
+  <% for task in @incomplete_tasks %>
+    <ul>
+      <li>
+        <%= check_box_tag 'task_id', task.id %>
+        <%= task.name %>
+      </li>
+    </ul>
+  <% end %>
+  <%= submit_tag 'Mark as Complete' %>
+<% end %>
+<h1>Complete Tasks</h1>
+<ul>
+<% for task in @complete_tasks %>
+  <li>
+      <%= task.name %>
+  </li>
+<% end %>
+</ul>
 
-     <%= "Completed task" %>
-     <p> <%= link_to task.name, task_path(task[:id]) %></p>
-     <% else %>
-     <%= "Incomplete tasks" %>
-     <p> <%= link_to task.name, task_path(task[:id]) %></p>
-     <% end %>
-     <p><%= link_to "Edit", task_path(task[:id]), method: :edit %></p>
-     <p><%= link_to "Delete", task_path(task[:id]), method: :delete %></p>
-   </ul>
-   <% end %>
+ <script>
+  $(".task-check").bind('change', function(){
+    $.ajax({
+      url: '/tasks/'+this.value+'/done',
+      type: 'POST',
+      data: {"done": this.checked},
+    });
+  });
 
- </ul>
+</script>

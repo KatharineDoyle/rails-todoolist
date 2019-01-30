@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all
+    @incomplete_tasks = Task.incomplete
+    @complete_tasks = Task.complete
   end
 
   def show
