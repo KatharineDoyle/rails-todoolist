@@ -1,4 +1,9 @@
-<p>Now is <%= Time.now %><p>
+<h2>My To Do List</h2>
+
+<div class="new-task-box">
+<input type="text" id="myInput" placeholder="Title...">
+<%= link_to "+ Add a new task", new_task_path %>
+</div>
 
   <ul>
     <% @tasks.each do |task| %>
@@ -10,8 +15,10 @@
      <%= "[ ]" %>
      <p> <%= link_to task.name, task_path(task[:id]) %></p>
      <% end %>
-     <p><%= link_to "🗑", task_path(task[:id]), method: :delete %></p>
+     <p><%= link_to "Edit", task_path(task[:id]), method: :edit %></p>
+     <p><%= link_to "Delete", task_path(task[:id]), method: :delete %></p>
    </ul>
    <% end %>
-   <%= link_to "+ Add a new task", new_task_path %>
+
  </ul>
+
