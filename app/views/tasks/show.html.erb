@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <h2><%= @task.name %></h2>
+  <p>Description: <em><%= @task.details %></em></p>
+  <p>Done? <%= @task.completed ? '[x]' : '[ ]' %></p>
+</div>
+
+<%= link_to "Back to my tasks list", tasks_path %>

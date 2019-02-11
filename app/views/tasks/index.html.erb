@@ -1,39 +1,33 @@
 <h2>My To Do List</h2>
 
 <div class="new-task-box">
-  <%= link_to 'Add a New Task +', new_path, class: 'btn btn-primary' %>
+  <%= link_to 'Add a New Task +', new_task_path, class: 'btn btn-primary' %>
 </div>
 
   <ul id="myUL">
-     <%= "Completed tasks" %>
+     <h1>Completed tasks</h1>
     <% @tasks.each do |task| %>
-     <% if task.completed? %>
+      <% if task.completed? %>
     <li>
      <p> <%= link_to task.name, task_path(task[:id]), class: 'task', id: 'complete-task' %></p>
-     <% if task.nil? %>
-      <%= 'Add some tasks!' %>
-      <% end %>
-      <% end %>
-      <p><%= link_to "Edit", task_path(task[:id]), method: :edit %></p>
+      <p><%= link_to "Edit", edit_task_path(task) %></p>
      <p><%= link_to "Delete", task_path(task[:id]), method: :delete, data: {confirm: "Are you sure?"} %></p>
     </li>
+      <% end %>
       <% end %>
    </ul>
 
   <ul>
-     <%= "Incomplete tasks" %>
-     <% @tasks.each do |task| %>
-     <% if task.completed == false %>
-     <li>
-     <p> <%= link_to task.name, task_path(task[:id]), class: 'task', id: 'incomplete-task'%></p>
-      <% if task.nil? %>
-      <%= 'You\'re all clear here!' %>
-     <% end %>
-     <p><%= link_to "Edit", task_path(task[:id]), method: :edit %></p>
-     <p><%= link_to "Delete", task_path(task[:id]), method: :delete, data: {confirm: "Are you sure?"} %></p>
+    <h1>Incomplete tasks</h1>
+       <% @tasks.each do |task| %>
+        <% if task.completed == false %>
+          <li>
+            <p> <%= link_to task.name, task_path(task[:id]), class: 'task', id: 'incomplete-task'%></p>
+            <p><%= link_to "Edit", edit_task_path(task) %></p>
+            <p><%= link_to "Delete", task_path(task[:id]), method: :delete, data: {confirm: "Are you sure?"} %></p>
+          </li>
+        <% end %>
       <% end %>
-      <% end %>
-      </li>
    </ul>
 
 
